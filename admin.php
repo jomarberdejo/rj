@@ -61,7 +61,7 @@
         <div id="delete_content"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
+        <button type="button" class="btn btn-primary" id='confirm' onclick="logout()">Continue</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       </div>
@@ -84,6 +84,13 @@
   </div>
 </body>
 <script>
+  function logout() {
+    var txt = document.getElementById('logout-btn').innerHTML;
+    window.location.href= 'login.php';
+}
+
+
+
 	 window.start_load = function(){
     $('body').prepend('<di id="preloader2"></di>')
   }

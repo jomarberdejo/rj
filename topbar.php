@@ -11,10 +11,33 @@
       <div class="col-md-4 float-left text-white">
         <large><b>Admin | Payroll Management System</b></large>
       </div>
-	  	<div class="col-md-2 float-right text-white">
-	  		<a href="ajax.php?action=logout" class="text-white"><?php echo $_SESSION['username'] ?> <i class="fa fa-power-off"></i></a>
+	  	<div class="col-md-2 float-right text-white" href="ajax.php?action=logout">
+	  		<a id="logout-btn" class="logout"><?php echo $_SESSION['username'] ?> <i class="fa fa-power-off"></i></a>
 	    </div>
     </div>
   </div>
   
+<script>
+$('.logout').click(function(){
+		_conf("Are you sure you want to Logout?","logout",[$(this).attr('username')])
+	})
+
+  // function logout($username){
+	// 	start_load()
+	// 	$.ajax({
+	// 		url:'ajax.php?action=logout',
+	// 		method:'POST',
+	// 		data:{username:$username},
+	// 		success:function(resp){
+	// 			if(resp==1){
+	// 				alert_toast("Successfully Logout",'success')
+	// 				setTimeout(function(){
+	// 					location.reload()
+	// 				},1500)
+
+	// 			}
+	// 		}
+	// 	})
+	// }
+</script>
 </nav>

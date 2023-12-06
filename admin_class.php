@@ -41,6 +41,7 @@ Class Action {
 			return 3;
 		}
 	}
+
 	function logout(){
 		session_destroy();
 		foreach ($_SESSION as $key => $value) {
@@ -48,12 +49,23 @@ Class Action {
 		}
 		header("location:login.php");
 	}
+
+	// function logout(){
+	// 	extract($_POST);
+	// 	$delete = $this->db->query("DELETE FROM users where username = ".$username);
+	// 	if($delete)
+	// 	header("location:login.php");;
+	// }
+
+
+
+
 	function logout2(){
 		session_destroy();
 		foreach ($_SESSION as $key => $value) {
 			unset($_SESSION[$key]);
 		}
-		header("location:../admin.php");
+		header("location:login.php");
 	}
 
 	function save_user(){

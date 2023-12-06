@@ -133,13 +133,14 @@ div#login-right::before {
   							<label for="password" class="control-label">Password</label>
   							<input type="password" id="password" name="password" class="form-control">
   						</div>
-						<div>
+						<div class="form-group">
+						<label for="type">User Type</label>
 						  <select name="type" id="type" class="custom-select">
 							<option value="Admin" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected': '' ?>>Admin</option>
 							<option value="Employee" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected': '' ?>>Employee</option>
 						</select>
 						</div>
-						<br>
+						<br><br>
   						<center><button class="btn-sm btn-block btn-wave col-md-4 btn-primary">Login</button></center>
   					</form>
   				</div>
