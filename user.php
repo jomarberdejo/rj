@@ -86,7 +86,7 @@
 <script>
     function logout() {
     var txt = document.getElementById('logout-btn').innerHTML;
-    window.location.href= 'login.php';
+    window.location.href= 'index.php';
 }
 
 	 window.start_load = function(){
