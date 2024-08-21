@@ -69,18 +69,18 @@
 		display:flex;
 		flex-wrap:nowrap;
 	}	
-	.card{
+	/* .card{
 		background: #d1d3e0;
 		
-	}
-	.new{
+	} */
+	/* .new{
 		padding:23px;
 		/* width:100%;
-		height:100%; */
+		height:100%; 
 
 		background: black;
 		background-size:cover;
-	}
+	} */
 		td, tr{
 		background-color: #fafafa;
 		vertical-align: middle !important;

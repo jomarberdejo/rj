@@ -1,58 +1,125 @@
 <style>
-table{
-    width:100%;
-    border-collapse:collapse;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
-tr,td,th{
-    border:1px solid black
+
+tr,
+td,
+th {
+    border: 1px solid black;
 }
-.text-center{
-    text-align:center;
+
+.text-center {
+    text-align: center;
 }
-.text-right{
-    text-align:right;
+
+.text-right {
+    text-align: right;
 }
 </style>
-<?php include('db_connect.php') ?>
+
+<?php include('db_connect.php'); ?>
+
 <?php
-		$pay = $conn->query("SELECT * FROM payroll where id = ".$_GET['id'])->fetch_array();
-		$pt = array(1=>"Monhtly",2=>"Semi-Monthly");
+
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
+$query = "SELECT * FROM wages";
+
+
+if ($id) {
+    $query .= " WHERE id = $id";
+}
+
+
+$pay = $conn->query($query)->fetch_array();
+
+
+if (!$pay) {
+    echo "<p>No payroll record found.</p>";
+    exit;
+}
+
+$pt = array(1 => "Monthly", 2 => "Semi-Monthly");
 ?>
 <div>
-<h2 class="text-center">Payroll - <?php echo $pay['ref_no'] ?></h2>
-<hr>
+    <!-- <h2 class="text-center">Payroll - <?php echo htmlspecialchars($pay['ref_no']); ?></h2> -->
+    <hr>
 </div>
-<table>
+
+<table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th class="text-center">Employee ID</th>
-            <th class="text-center">Employee Name</th>
-            <th class="text-center">Monthly Salary</th>
-            <th class="text-center">Absent</th>
-            <th class="text-center">Tardy/Undertime(mins)</th>
-            <th class="text-center">Total Allowance</th>
-            <th class="text-center">Total Deduction</th>
-            <th class="text-center">Net Pay</th>
+            <th rowspan="2" class="text-center align-middle">No.</th>
+            <th rowspan="2" class="text-center align-middle">Name</th>
+            <th rowspan="2" class="text-center align-middle">Position</th>
+            <th class="text-center" colspan="5">WAGES</th>
+            <th rowspan="2" class="text-center align-middle">Tax Percentage</th>
+            <th rowspan="2" class="text-center align-middle">Withholding Tax</th>
+            <th rowspan="2" class="text-center align-middle">Net Amount Due</th>
+            <th rowspan="2" class="text-center align-middle">Remarks</th>
+
+        </tr>
+        <tr>
+            <th class="text-center align-middle">Number of minutes Worked <br> (OVERLOAD)</th>
+            <th class="text-center align-middle">Rate per hour</th>
+            <!-- <th class="text-center align-middle">Tardiness</th> -->
+            <th class="text-center align-middle">Undertime</th>
+            <th class="text-center align-middle">Overtime</th>
+            <th class="text-center align-middle">GRAND TOTAL AMOUNT</th>
         </tr>
     </thead>
     <tbody>
-    <?php
-									
-        $payroll=$conn->query("SELECT p.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as ename,e.employee_no,e.salary FROM payroll_items p inner join employee e on e.id = p.employee_id ") or die(mysqli_error());
-        while($row=$payroll->fetch_array()){
-    ?>
-    <tr>
-        <td><?php echo $row['employee_no'] ?></td>
-        <td><?php echo ucwords($row['ename']) ?></td>
-        <td class="text-right"><?php echo number_format($row['salary'],2) ?></td>
-        <td class="text-right"><?php echo $row['absent'] ?></td>
-        <td class="text-right"><?php echo $row['late'] ?></td>
-        <td class="text-right"><?php echo number_format($row['allowance_amount'],2) ?></td>
-        <td class="text-right"><?php echo number_format($row['deduction_amount'],2) ?></td>
-        <td class="text-right"><?php echo number_format($row['net'],2) ?></td>
-    </tr>
-    <?php
-        }
-    ?>
+        <?php
+						$i = 1;
+						$wages_info = $conn->query("
+							SELECT wages.*, employee.fullname, employee.position
+							FROM wages
+							INNER JOIN employee ON wages.employee_id = employee.id
+							ORDER BY wages.id ASC
+						");
+						while ($row = $wages_info->fetch_assoc()) :
+						?>
+        <tr>
+            <td class="text-center"><?php echo $i++; ?></td>
+            <td>
+                <b><?php echo $row['fullname']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['position']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['no_of_hours']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['rate_per_hour']; ?></b>
+            </td>
+            <!-- <td>
+									<b><?php echo $row['tardiness']; ?></b>
+								</td> -->
+            <td>
+                <b><?php echo !empty($row['undertime']) ? $row['undertime'] : 'None'; ?></b>
+            </td>
+            <td>
+                <b><?php echo !empty($row['overtime']) ? $row['overtime'] : 'None'; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['grand_total']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['tax_percentage']; ?>%</b>
+            </td>
+            <td>
+                <b><?php echo $row['withholding_tax']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['net_amount_due']; ?></b>
+            </td>
+            <td>
+                <b><?php echo $row['remarks']; ?></b>
+            </td>
+
+        </tr>
+        <?php endwhile; ?>
     </tbody>
 </table>

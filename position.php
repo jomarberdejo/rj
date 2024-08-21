@@ -27,7 +27,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Name</label>
+								<label class="control-label">Position</label>	
 								<textarea name="name" id="" cols="30" rows="2" class="form-control"></textarea>
 							</div>
 							
@@ -101,8 +101,9 @@
 		padding:10px;
 		/* width:100%;
 		height:100%; */
-		background: black;
+		/* background: black; */
 		background-size:cover;
+		background: #d1d3e0;
 	}
 
 	td, tr{
@@ -114,7 +115,7 @@
 	}
 	img{
 		max-width:100px;
-		max-height: :150px;
+		max-height:150px;
 	}
 </style>
 <script>

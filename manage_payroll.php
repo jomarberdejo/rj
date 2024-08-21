@@ -22,7 +22,7 @@
 						<option value="2">Semi-Monthly</option>
 					</select>
 				</div>
-		</form>
+		</form> 	
 	</div>
 </div>
 

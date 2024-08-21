@@ -97,7 +97,7 @@
 		padding:20px;
 		/* width:100%;
 		height:100%; */
-		background: black;
+		/* background: black; */
 		background-size:cover;
 	}
 

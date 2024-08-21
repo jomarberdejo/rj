@@ -24,7 +24,7 @@
 							</thead>
 							<tbody>
 								<?php
-									$att=$conn->query("SELECT a.*,e.employee_no, concat(e.lastname,', ',e.firstname,' ',e.middlename) as ename FROM attendance a inner join employee e on a.employee_id = e.id order by UNIX_TIMESTAMP(datetime_log) asc  ") or die(mysqli_error());
+									$att=$conn->query("SELECT a.*,e.employee_no, concat(e.lastname,', ',e.firstname,' ',e.middlename) as ename FROM attendance a inner join employee e on a.employee_id = e.id order by UNIX_TIMESTAMP(datetime_log) asc  ");
 									$lt_arr = array(1 => " Time-in AM",2=>"Time-out AM",3 => " Time-in PM",4=>"Time-out PM");
 									while($row=$att->fetch_array()){
 										$date = date("Y-m-d",strtotime($row['datetime_log']));
@@ -87,7 +87,7 @@
 		padding:10px;
 		/* width:100%;
 		height:100%; */
-		background: black;
+		/* background: black; */
 		background-size:cover;
 	}
 	td, tr{

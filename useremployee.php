@@ -10,9 +10,9 @@
 							<thead>
 								<tr>
 									<th>Employee No</th>
-									<th>Firstname</th>
-									<th>Middlename</th>
-									<th>Lastname</th>
+									<th>Fullname</th>
+									<!-- <th>Middlename</th>
+									<th>Lastname</th> -->
 									<th>Department</th>
 									<th>Position</th>
 								</tr>
@@ -34,9 +34,9 @@
 								?>
 								<tr>
 									<td><?php echo $row['employee_no']?></td>
-									<td><?php echo $row['firstname']?></td>
-									<td><?php echo $row['middlename']?></td>
-									<td><?php echo $row['lastname']?></td>
+									<td><?php echo $row['fullname']?></td>
+									<!-- <td><?php echo $row['middlename']?></td>
+									<td><?php echo $row['lastname']?></td> -->
 									<td><?php echo $d_arr[$row['department_id']]?></td>
 									<td><?php echo $p_arr[$row['position_id']]?></td>
 								</tr>
@@ -62,7 +62,7 @@
 				padding:10px;
 				/* width:100%;
 				height:100%; */
-				background: black;
+				/* background: black; */
 				background-size:cover;
 			}
 			td, tr{
